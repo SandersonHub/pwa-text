@@ -20,5 +20,5 @@ window.addEventListener('beforeinstallprompt', (event) => {
 
 window.addEventListener('appinstalled', (event) => {
     // Log the app installation event to analytics
-    console.log('App was installed', event);
+    console.log('app was installed', event);
 });
