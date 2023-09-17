@@ -26,18 +26,32 @@ warmStrategyCache({
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// TODO: Implement asset caching //COMPLETE
+// TODO: Implement asset caching
 
 
-// Register a route to cache assets.
+// Path: client/src-sw.js
+//function to handle the registration script
 registerRoute(
-  // defines a route from the assets
-  // regular expression or even a function
-  ({ request }) => {
-    // register a route, 
-    //checks if style or script
-    return request.destination === 'style' || request.destination === 'script';
-  },
-  //service worker will cache using "CacheFirst"
-  assetCacheStrategy
+
+  //arrow function
+  //takes in a request object
+  //serves the registerRoute as the first argument
+  // returns true if the request destination is style, script, or worker
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
+  //request.destination is the request object that specifies the destination of the request
+
+//returns a new StaleWhileRevalidate object
+  new StaleWhileRevalidate({
+    //cache name
+    cacheName: 'asset-cache',
+    //plugins
+    plugins: [
+      //cacheable response plugin
+      //specifies the statuses, which HTTP response should be cached
+      new CacheableResponsePlugin({
+        //HTTP status codes 0 to 200 that should be cached
+        statuses: [0, 200],
+      }),
+    ],
+  })
 );
