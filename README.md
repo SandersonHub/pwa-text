@@ -8,8 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Download the code.
 2. Open your favorite coding program.
-3. Run NPM install
-4. Run NPM Start, to start the local server on local host 3000.
+4. Run NPM install
+5. NPM Run Build
+6. Run NPM Start, to start the local server on local host 3000.
 
 ### Installing
 
